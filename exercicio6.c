@@ -11,7 +11,6 @@ int main() {
     printf("Digite o nome completo: ");
     fgets(nome, sizeof(nome), stdin);
 
-    /* remove o \n deixado pelo fgets */
     nome[strcspn(nome, "\n")] = '\0';
 
     tamanho = strlen(nome);
