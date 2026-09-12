@@ -34,7 +34,6 @@ int posicaoOcupada(char tabuleiro[3][3], int linha, int coluna) {
 int verificarVencedor(char tabuleiro[3][3]) {
     int i;
 
-    /* linhas e colunas */
     for (i = 0; i < 3; i++) {
         if (tabuleiro[i][0] != ' ' && tabuleiro[i][0] == tabuleiro[i][1] &&
             tabuleiro[i][1] == tabuleiro[i][2]) {
@@ -46,7 +45,6 @@ int verificarVencedor(char tabuleiro[3][3]) {
         }
     }
 
-    /* diagonais */
     if (tabuleiro[0][0] != ' ' && tabuleiro[0][0] == tabuleiro[1][1] &&
         tabuleiro[1][1] == tabuleiro[2][2]) {
         return 1;
