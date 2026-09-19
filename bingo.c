@@ -6,7 +6,6 @@
 #define COLUNAS 5
 #define MAX_CARTELAS 100
 
-/* enumeracao para representar as colunas do bingo */
 typedef enum {
     B = 0,
     I = 1,
@@ -15,7 +14,6 @@ typedef enum {
     O = 4
 } Coluna;
 
-/* struct para representar uma cartela (desafio 3) */
 typedef struct {
     int numeros[LINHAS][COLUNAS];
 } Cartela;
@@ -23,12 +21,10 @@ typedef struct {
 int minimoColuna[COLUNAS] = {1, 16, 31, 46, 61};
 int maximoColuna[COLUNAS] = {15, 30, 45, 60, 75};
 
-/* gera um numero inteiro aleatorio entre minimo e maximo (inclusive) */
 int gerarNumero(int minimo, int maximo) {
     return minimo + rand() % (maximo - minimo + 1);
 }
 
-/* verifica se um numero ja existe na coluna da cartela */
 int numeroExiste(int cartela[LINHAS][COLUNAS], int coluna, int numero) {
     int linha;
     for (linha = 0; linha < LINHAS; linha++) {
@@ -39,13 +35,11 @@ int numeroExiste(int cartela[LINHAS][COLUNAS], int coluna, int numero) {
     return 0;
 }
 
-/* ordena os numeros de uma coluna em ordem crescente (desafio 4) */
 void ordenarColuna(int cartela[LINHAS][COLUNAS], int coluna) {
     int valores[LINHAS];
     int quantidade = 0;
     int linha, i, j, temp;
 
-    /* copia os valores da coluna, ignorando o espaco livre (0) */
     for (linha = 0; linha < LINHAS; linha++) {
         if (cartela[linha][coluna] != 0) {
             valores[quantidade] = cartela[linha][coluna];
@@ -53,7 +47,6 @@ void ordenarColuna(int cartela[LINHAS][COLUNAS], int coluna) {
         }
     }
 
-    /* ordenacao simples (bubble sort) */
     for (i = 0; i < quantidade - 1; i++) {
         for (j = 0; j < quantidade - 1 - i; j++) {
             if (valores[j] > valores[j + 1]) {
@@ -64,7 +57,6 @@ void ordenarColuna(int cartela[LINHAS][COLUNAS], int coluna) {
         }
     }
 
-    /* devolve os valores ordenados para a coluna, mantendo o espaco livre */
     i = 0;
     for (linha = 0; linha < LINHAS; linha++) {
         if (cartela[linha][coluna] != 0) {
@@ -74,14 +66,12 @@ void ordenarColuna(int cartela[LINHAS][COLUNAS], int coluna) {
     }
 }
 
-/* preenche uma cartela respeitando as faixas de cada coluna */
 void gerarCartela(int cartela[LINHAS][COLUNAS]) {
     int linha, coluna, numero;
 
     for (coluna = 0; coluna < COLUNAS; coluna++) {
         for (linha = 0; linha < LINHAS; linha++) {
 
-            /* posicao central livre (linha 2, coluna N) */
             if (linha == 2 && coluna == N) {
                 cartela[linha][coluna] = 0;
                 continue;
@@ -100,7 +90,6 @@ void gerarCartela(int cartela[LINHAS][COLUNAS]) {
     }
 }
 
-/* compara duas cartelas e informa se sao identicas (desafio 5) */
 int cartelasIguais(Cartela a, Cartela b) {
     int linha, coluna;
 
@@ -115,7 +104,6 @@ int cartelasIguais(Cartela a, Cartela b) {
     return 1;
 }
 
-/* imprime a cartela formatada no terminal */
 void imprimirCartela(int cartela[LINHAS][COLUNAS]) {
     int linha, coluna;
 
@@ -154,7 +142,6 @@ int main() {
             gerarCartela(cartelas[i].numeros);
             gerarNova = 0;
 
-            /* garante que nenhuma cartela se repita (desafio 5) */
             for (j = 0; j < i; j++) {
                 if (cartelasIguais(cartelas[i], cartelas[j])) {
                     gerarNova = 1;
